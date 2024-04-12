@@ -1,5 +1,6 @@
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import placeholderImg from "../assets/images/placeholder.webp";
 
 export default function Moviecard({ moviesList }) {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Moviecard({ moviesList }) {
         >
           <div className="overflow-hidden">
             <img
-              src={movie?.Poster}
+              src={movie?.Poster !== "N/A" ? movie?.Poster : placeholderImg}
               alt="Poster"
               className="w-full h-[14rem] transition ease-in-out delay-200 bg-white hover:scale-[1.2]"
             />

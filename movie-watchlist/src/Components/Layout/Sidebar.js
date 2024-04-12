@@ -4,13 +4,18 @@ import { useLocation } from "react-router-dom";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
-
+import { GoSignOut } from "react-icons/go";
+import { logoutFn } from "../../Redux/logoutSlice";
+import { profileState } from "../../Redux/profileSlice";
+import { useSelector } from "react-redux";
 export default function Sidebar({ openSidebar, setOpenSidebar }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { email } = useSelector(profileState);
+  const [showMenu, setShowMenu] = useState(false);
   const sidebarLinks = [
     {
       path: "/",
@@ -72,16 +77,30 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
           My lists
         </button>
         <div
-          className="flex gap-2 border-2 rounded-md border-[#EAECF0] w-full mt-auto items-center fill-black text-[1.05rem] text-black p-1 pl-2 hover:bg-red-600 hover:text-white hover:fill-white font-normal"
-          onClick={() => {
-            navigate("/signin");
-          }}
+          onMouseEnter={() => setShowMenu(true)}
+          onMouseLeave={() => setShowMenu(false)}
+          className="flex relative cursor-pointer gap-2 border-2 rounded-md border-[#EAECF0] w-full mt-auto items-center fill-black text-[1.05rem] text-black p-1 pl-2  font-normal"
         >
           <RiAccountCircleLine className="fill-inherit" size={30} />
           Account
           <button className="ml-auto cursor-pointer">
             <IoEllipsisVerticalSharp className=" rotate-90" />
           </button>
+          {showMenu && (
+            <div className="absolute flex flex-col items-start p-4 gap-3 shadow-lg rounded-md bg-white -top-[3.4rem] -right-[13.5rem]">
+              <p className="text-black">{email}</p>
+              <button
+                className="flex gap-2 w-full mt-auto items-center  text-[1.05rem] text-black font-normal"
+                onClick={() => {
+                  dispatch(logoutFn());
+                  navigate("/signin");
+                }}
+              >
+                <GoSignOut color="#000" size={20} />
+                Sign out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </aside>

@@ -3,7 +3,6 @@ import { logoutFn } from "./logoutSlice";
 
 const initialState = {
   email: "",
-  token: "",
   isLoggedIn: false,
 };
 

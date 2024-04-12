@@ -3,17 +3,28 @@ import SigninPage from "./Pages/Signin";
 import Layout from "./Components/Layout";
 import MoviesPage from "./Pages/Dashboard";
 import MovieDetailsPage from "./Pages/MovieDetails";
+import { profileState } from "./Redux/profileSlice";
+import { useSelector } from "react-redux";
 
 function App() {
   return (
     <Routes>
       <Route path="/signin" element={<SigninPage />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<MoviesPage />} />
-        <Route path="/Movies/:title/:id" element={<MovieDetailsPage />} />
+        <Route index element={<PrivateRoute children={<MoviesPage />} />} />
+        <Route
+          path="/Movies/:title/:id"
+          element={<PrivateRoute children={<MovieDetailsPage />} />}
+        />
       </Route>
     </Routes>
   );
 }
 
 export default App;
+
+function PrivateRoute({ children }) {
+  const isLoggedIn = useSelector(profileState);
+  console.log(isLoggedIn);
+  return isLoggedIn ? children : <Navigate to="/signin" />;
+}

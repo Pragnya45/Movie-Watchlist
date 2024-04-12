@@ -4,6 +4,7 @@ import useNotification from "../../Components/useNotification";
 import { useParams } from "react-router-dom";
 import useApi from "../../Hooks/useApi";
 import { env } from "../../utils/env";
+import placeholderImg from "../../assets/images/placeholder.webp";
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -30,11 +31,22 @@ export default function MovieDetails() {
   }, []);
   return (
     <>
-      {movieDetails && movieDetails.length ? (
+      {movieDetails ? (
         <div className="flex flex-col h-24 gap-8 py-4 px-6">
-          <p className="text-3xl font-semibold text-black">
+          <p className="text-3xl font-semibold text-red-600">
             {movieDetails?.Title}
           </p>
+          <div className="flex gap-4">
+            <img
+              src={
+                movieDetails?.Poster !== "N/A"
+                  ? movieDetails?.Poster
+                  : placeholderImg
+              }
+              alt="Poster"
+              className="w-[14rem] shadow-lg object-cover"
+            />
+          </div>
         </div>
       ) : (
         <div className="h-full w-full flex items-center justify-center">
