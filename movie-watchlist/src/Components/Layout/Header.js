@@ -1,15 +1,25 @@
 import Logo from "../../assets/images/Movies watchlist.png";
 import { FaSearch } from "react-icons/fa";
-export default function Header() {
+import { Link } from "react-router-dom";
+import { FiMenu } from "react-icons/fi";
+export default function Header({ openSidebar, setOpenSidebar }) {
   return (
     <header className="h-20 shadow-md">
       <div className="container h-full w-full max-w-screen-2xl flex items-center mx-auto px-4 justify-between">
-        <div>
-          <img
-            src={Logo}
-            alt="Logo"
-            className="w-[6rem] h-[5rem] object-cover"
-          />
+        <div className="flex gap-4">
+          <button
+            className="sm:hidden cursor-pointer"
+            onClick={() => setOpenSidebar(!openSidebar)}
+          >
+            <FiMenu color="#000" size={30} />
+          </button>
+          <Link to={"/"}>
+            <img
+              src={Logo}
+              alt="Logo"
+              className="sm:w-[6rem] sm:h-[5rem] w-[3rem] h-[3rem] object-contain"
+            />
+          </Link>
         </div>
         {/* <div className="lg:flex hidden items-center border rounded-full pl-2 w-full justify-between max-w-sm focus-within:shadow-md">
           <input

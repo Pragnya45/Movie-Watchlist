@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { FaSearch } from "react-icons/fa";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
 
-export default function Sidebar() {
+export default function Sidebar({ openSidebar, setOpenSidebar }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,14 +15,16 @@ export default function Sidebar() {
     {
       path: "/",
       label: "Home",
-      icon: <MdOutlineHome color="#000" size={25} />,
     },
   ];
 
   return (
     <aside
-      className={`h-full border-r-2 px-6 border-[#EAECF0] w-0 sm:w-72 absolute left-[0px]
-        sm:relative flex bg-white   items-center flex-col gap-2 z-10`}
+      className={`h-full ${
+        openSidebar ? "w-64" : "w-0 sm:w-64"
+      } border-r-2 px-6 border-[#EAECF0] absolute ${
+        openSidebar ? "left-[0px]" : "left-[-500px] sm:left-[0px]"
+      }  sm:relative flex bg-white  items-center flex-col gap-2 z-10`}
     >
       <h1 className="mx-auto my-1 text-3xl font-semibold text-red-600">
         Watchlist
@@ -36,7 +38,7 @@ export default function Sidebar() {
         />
       </div>
 
-      <div className="flex flex-col justify-between h-[74%] items-start w-full gap-3 pt-4">
+      <div className="flex flex-col justify-between h-[70%] items-start w-full gap-3 pt-4">
         {sidebarLinks.map((link, index) => (
           <NavLink
             key={index}
@@ -66,7 +68,9 @@ export default function Sidebar() {
           </NavLink>
         ))}
         <div className="w-full h-[2px] bg-[#EAECF0]"></div>
-        <h3 className="my-1 text-xl font-semibold text-black">My lists</h3>
+        <button className="my-1 text-xl cursor-pointer font-semibold text-black">
+          My lists
+        </button>
         <div
           className="flex gap-2 border-2 rounded-md border-[#EAECF0] w-full mt-auto items-center fill-black text-[1.05rem] text-black p-1 pl-2 hover:bg-red-600 hover:text-white hover:fill-white font-normal"
           onClick={() => {
