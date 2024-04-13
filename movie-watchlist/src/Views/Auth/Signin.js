@@ -22,7 +22,7 @@ export default function Signin() {
     );
     navigate("/");
     showMessage({
-      type: "Success",
+      type: "success",
       value: "SignedIn Successfully",
     });
   };

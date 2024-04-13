@@ -53,8 +53,6 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
                 ? "bg-red-600 font-bold"
                 : "bg-tranparent"
             }
-             
-            
             `}
           >
             <button

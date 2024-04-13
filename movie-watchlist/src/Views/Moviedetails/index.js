@@ -6,12 +6,15 @@ import useApi from "../../Hooks/useApi";
 import { env } from "../../utils/env";
 import placeholderImg from "../../assets/images/placeholder.webp";
 import { MdDone } from "react-icons/md";
+import { GrAdd } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState();
   const [apiFn] = useApi();
   const { showMessage } = useNotification();
+  const navigate = useNavigate();
 
   const fetchMovies = async () => {
     const { response, error } = await apiFn({
@@ -30,6 +33,16 @@ export default function MovieDetails() {
   useEffect(() => {
     fetchMovies();
   }, []);
+  const addToWatchlist = (movie) => {
+    const watchlistMovies = JSON.parse(localStorage.getItem("watchlist"));
+    const updatedWatchlist = [...watchlistMovies, movie];
+    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+    showMessage({
+      type: "success",
+      value: "Movie added to your watchlist",
+    });
+    navigate("/watchlist");
+  };
   return (
     <>
       {movieDetails ? (
@@ -80,6 +93,14 @@ export default function MovieDetails() {
               <p className="text-[#475467] font-semibold  mt-2 text-[14px]">
                 Relased - {movieDetails?.Released}
               </p>
+
+              <button
+                onClick={() => addToWatchlist(movieDetails)}
+                className="flex py-2 mt-5 w-fit rounded-md drop-shadow-lg bg-red-600 gap-2 px-5 items-center  text-white font-extrabold text-[14px] fill-white"
+              >
+                <GrAdd size={23} />
+                Add to Watchlist
+              </button>
             </div>
           </div>
           <div className="w-full h-[2px] bg-[#EAECF0]"></div>
