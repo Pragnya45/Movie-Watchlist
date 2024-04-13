@@ -7,6 +7,7 @@ import { profileFn } from "../../Redux/profileSlice";
 export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { showMessage } = useNotification();
   const [email, setEmail] = useState();
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -20,6 +21,10 @@ export default function Signin() {
       })
     );
     navigate("/");
+    showMessage({
+      type: "Success",
+      value: "SignedIn Successfully",
+    });
   };
   return (
     <div className="flex items-center justify-center w-full h-screen">

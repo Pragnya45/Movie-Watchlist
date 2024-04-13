@@ -58,24 +58,24 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
             `}
           >
             <button
-              className={`flex gap-2 w-full items-center  text-[1.05rem] text-black p-3  hover:text-white hover:bg-red-600 ${
+              className={`flex gap-2 w-full items-center fill-black text-[1.05rem]  p-3  hover:fill-white hover:text-white hover:bg-red-600 hover:rounded-md ${
                 location.pathname === link.path
-                  ? "font-medium text-white"
+                  ? "font-medium  fill-white text-white"
                   : "font-normal"
               }`}
             >
-              <MdOutlineHome
-                color={location.pathname === link.path ? "#fff" : "#000"}
-                size={25}
-              />
+              <MdOutlineHome className="fill-inherit" size={25} />
               {link.label}
             </button>
           </NavLink>
         ))}
         <div className="w-full h-[2px] bg-[#EAECF0]"></div>
-        <button className="my-1 text-xl cursor-pointer font-semibold text-black">
+        <NavLink
+          to="/watchlist"
+          className="my-1 text-xl cursor-pointer font-semibold text-black"
+        >
           My lists
-        </button>
+        </NavLink>
         <div
           onMouseEnter={() => setShowMenu(true)}
           onMouseLeave={() => setShowMenu(false)}
