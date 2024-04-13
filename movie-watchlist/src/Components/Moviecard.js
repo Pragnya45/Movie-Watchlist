@@ -6,14 +6,17 @@ import useNotification from "./useNotification";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
 import { GoSignOut } from "react-icons/go";
 
-export default function Moviecard({ moviesList, watchlist }) {
+export default function Moviecard({
+  moviesList,
+  watchlist,
+  removeFromWatchlist,
+}) {
+  console.log(moviesList);
   const navigate = useNavigate();
   const { showMessage } = useNotification();
-  const menuRef = useRef(null);
-  const [watchlistMovies, setWatchlistMovies] = useState(
-    JSON.parse(localStorage.getItem("watchlist")) || []
-  );
+
   const addToWatchlist = (movie) => {
+    const watchlistMovies = JSON.parse(localStorage.getItem("watchlist"));
     const isAlreadyAdded = watchlistMovies.some(
       (item) => item.imdbID === movie.imdbID
     );
@@ -27,22 +30,15 @@ export default function Moviecard({ moviesList, watchlist }) {
     }
     const updatedWatchlist = [...watchlistMovies, movie];
     localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
-    setWatchlistMovies(updatedWatchlist);
+    // setWatchlistMovies(updatedWatchlist);
     showMessage({
       type: "success",
       value: "Movie added to your watchlist",
     });
   };
-  const removeFromWatchlist = (movieId) => {
-    const updatedWatchlist = watchlistMovies.filter(
-      (movie) => movie.imdbID !== movieId
-    );
-    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
-    setWatchlistMovies(updatedWatchlist);
-  };
-  const listToMap = watchlist ? watchlistMovies : moviesList;
 
   const MovieMenu = ({ movie }) => {
+    const menuRef = useRef(null);
     const handlePopup = (e) => {
       e.stopPropagation();
       if (menuRef.current && showMenu && !menuRef.current.contains(e.target)) {
@@ -78,8 +74,8 @@ export default function Moviecard({ moviesList, watchlist }) {
 
   return (
     <div className="flex gap-10 w-full flex-wrap justify-center sm:justify-start">
-      {listToMap && listToMap.length ? (
-        listToMap?.map((movie, i) => (
+      {moviesList && moviesList.length ? (
+        moviesList?.map((movie, i) => (
           <div
             className="flex flex-col cursor-pointer relative w-48 h-[20rem] shadow-lg"
             key={i}

@@ -26,7 +26,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
   return (
     <aside
       className={`h-full ${
-        openSidebar ? "w-64" : "w-0 sm:w-64"
+        openSidebar ? "w-64" : "w-0 sm:w-72"
       } border-r-2 px-6 border-[#EAECF0] absolute ${
         openSidebar ? "left-[0px]" : "left-[-500px] sm:left-[0px]"
       }  sm:relative flex bg-white  items-center flex-col gap-2 z-10`}
@@ -85,10 +85,10 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
             <IoEllipsisVerticalSharp className=" rotate-90" />
           </button>
           {showMenu && (
-            <div className="absolute flex flex-col items-start p-4 gap-3 shadow-lg rounded-md bg-white -top-[3.4rem] -right-[13.5rem]">
-              <p className="text-black">{email}</p>
+            <div className="absolute flex flex-col items-start py-2  gap-2  shadow-lg rounded-md bg-white -top-[3.4rem] -right-[11.5rem]">
+              <p className="text-black px-4">{email}</p>
               <button
-                className="flex gap-2 w-full mt-auto items-center  text-[1.05rem] text-black font-normal"
+                className="flex hover:bg-red-100 gap-2 w-full p-2 mt-auto items-center   text-[1.05rem] text-black font-normal"
                 onClick={() => {
                   dispatch(logoutFn());
                   navigate("/signin");
