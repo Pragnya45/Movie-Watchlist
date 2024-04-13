@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import Moviecard from "../../Components/Moviecard";
 import { useEffect, useState } from "react";
 import { Loader } from "../../Components/Loader";
-import useNotification from "../../Components/useNotification";
+import useNotification from "../../Hooks/useNotification";
 import useApi from "../../Hooks/useApi";
 import { env } from "../../utils/env";
 

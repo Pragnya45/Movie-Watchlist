@@ -2,22 +2,31 @@ import { BsBookmarkPlusFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import placeholderImg from "../assets/images/placeholder.webp";
 import { useState, useRef } from "react";
-import useNotification from "./useNotification";
+import useNotification from "../Hooks/useNotification";
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
 import { GoSignOut } from "react-icons/go";
+import { Tooltip } from "antd";
+import { useSelector } from "react-redux";
+import { profileState } from "../Redux/profileSlice";
 
 export default function Moviecard({
   moviesList,
   watchlist,
   removeFromWatchlist,
 }) {
-  console.log(moviesList);
+  const { email } = useSelector(profileState);
+
   const navigate = useNavigate();
   const { showMessage } = useNotification();
 
   const addToWatchlist = (movie) => {
-    const watchlistMovies = JSON.parse(localStorage.getItem("watchlist"));
-    const isAlreadyAdded = watchlistMovies.some(
+    const watchlist = JSON.parse(localStorage.getItem("watchlist")) || {};
+
+    if (!watchlist[email]) {
+      watchlist[email] = [];
+    }
+
+    const isAlreadyAdded = watchlist[email].some(
       (item) => item.imdbID === movie.imdbID
     );
 
@@ -28,9 +37,10 @@ export default function Moviecard({
       });
       return;
     }
-    const updatedWatchlist = [...watchlistMovies, movie];
-    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
-    // setWatchlistMovies(updatedWatchlist);
+    watchlist[email].push(movie);
+
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    console.log(watchlist);
     showMessage({
       type: "success",
       value: "Movie added to your watchlist",
@@ -53,7 +63,9 @@ export default function Moviecard({
 
     return (
       <div className="relative" ref={menuRef}>
-        <IoEllipsisVerticalSharp onClick={() => setShowMenu(!showMenu)} />
+        <Tooltip title="Remove from Watchlist" placement="bottom">
+          <IoEllipsisVerticalSharp onClick={() => setShowMenu(!showMenu)} />
+        </Tooltip>
         {showMenu && (
           <div className="absolute z-10 flex flex-col items-start p-4 gap-3 shadow-lg rounded-md bg-white -top-[4rem] -right-[6rem]">
             <button

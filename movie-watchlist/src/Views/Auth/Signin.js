@@ -2,7 +2,7 @@ import signinIcon from "../../assets/signin.gif";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useNotification from "../../Components/useNotification";
+import useNotification from "../../Hooks/useNotification";
 import { profileFn } from "../../Redux/profileSlice";
 export default function Signin() {
   const dispatch = useDispatch();

@@ -70,7 +70,9 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
         <div className="w-full h-[2px] bg-[#EAECF0]"></div>
         <NavLink
           to="/watchlist"
-          className="my-1 text-xl cursor-pointer font-semibold text-black"
+          className={`my-1 text-xl w-full p-3 text-left rounded-md cursor-pointer hover:text-white hover:bg-red-600 font-semibold text-black ${
+            location.pathname === "/watchlist" ? "text-white bg-red-600" : ""
+          }`}
         >
           My lists
         </NavLink>
@@ -85,7 +87,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
             <IoEllipsisVerticalSharp className=" rotate-90" />
           </button>
           {showMenu && (
-            <div className="absolute flex flex-col items-start py-2  gap-2  shadow-lg rounded-md bg-white -top-[3.4rem] -right-[11.5rem]">
+            <div className="absolute min-w-[12rem] w-fit flex flex-col items-start py-2  gap-2  shadow-lg rounded-md bg-white -top-[3.4rem] -right-[11.5rem]">
               <p className="text-black px-4">{email}</p>
               <button
                 className="flex hover:bg-red-100 gap-2 w-full p-2 mt-auto items-center   text-[1.05rem] text-black font-normal"

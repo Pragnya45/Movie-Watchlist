@@ -1,15 +1,23 @@
 import Moviecard from "../../Components/Moviecard";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { profileState } from "../../Redux/profileSlice";
 
 export default function Watchlist() {
-  const [watchlistMovies, setWatchlistMovies] = useState(
-    JSON.parse(localStorage.getItem("watchlist")) || []
-  );
+  const { email } = useSelector(profileState);
+  const [watchlistMovies, setWatchlistMovies] = useState(() => {
+    return JSON.parse(localStorage.getItem("watchlist"))?.[email] || [];
+  });
   const removeFromWatchlist = (movieId) => {
-    const updatedWatchlist = watchlistMovies.filter(
+    const watchlist = JSON.parse(localStorage.getItem("watchlist")) || {};
+
+    const updatedWatchlist = (watchlist[email] || []).filter(
       (movie) => movie.imdbID !== movieId
     );
-    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+
+    watchlist[email] = updatedWatchlist;
+
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
     setWatchlistMovies(updatedWatchlist);
   };
   return (

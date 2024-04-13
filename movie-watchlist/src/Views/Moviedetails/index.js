@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader } from "../../Components/Loader";
-import useNotification from "../../Components/useNotification";
+import useNotification from "../../Hooks/useNotification";
 import { useParams } from "react-router-dom";
 import useApi from "../../Hooks/useApi";
 import { env } from "../../utils/env";
@@ -8,6 +8,9 @@ import placeholderImg from "../../assets/images/placeholder.webp";
 import { MdDone } from "react-icons/md";
 import { GrAdd } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "antd";
+import { useSelector } from "react-redux";
+import { profileState } from "../../Redux/profileSlice";
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -15,7 +18,7 @@ export default function MovieDetails() {
   const [apiFn] = useApi();
   const { showMessage } = useNotification();
   const navigate = useNavigate();
-
+  const { email } = useSelector(profileState);
   const fetchMovies = async () => {
     const { response, error } = await apiFn({
       url: `?i=${id}&apiKey=${env?.apikey}`,
@@ -34,9 +37,27 @@ export default function MovieDetails() {
     fetchMovies();
   }, []);
   const addToWatchlist = (movie) => {
-    const watchlistMovies = JSON.parse(localStorage.getItem("watchlist"));
-    const updatedWatchlist = [...watchlistMovies, movie];
-    localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+    const watchlist = JSON.parse(localStorage.getItem("watchlist")) || {};
+
+    if (!watchlist[email]) {
+      watchlist[email] = [];
+    }
+
+    const isAlreadyAdded = watchlist[email].some(
+      (item) => item.imdbID === movie.imdbID
+    );
+
+    if (isAlreadyAdded) {
+      showMessage({
+        type: "error",
+        value: "Movie is already in your watchlist",
+      });
+      return;
+    }
+    watchlist[email].push(movie);
+
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    console.log(watchlist);
     showMessage({
       type: "success",
       value: "Movie added to your watchlist",
@@ -93,14 +114,15 @@ export default function MovieDetails() {
               <p className="text-[#475467] font-semibold  mt-2 text-[14px]">
                 Relased - {movieDetails?.Released}
               </p>
-
-              <button
-                onClick={() => addToWatchlist(movieDetails)}
-                className="flex py-2 mt-5 w-fit rounded-md drop-shadow-lg bg-red-600 gap-2 px-5 items-center  text-white font-extrabold text-[14px] fill-white"
-              >
-                <GrAdd size={23} />
-                Add to Watchlist
-              </button>
+              <Tooltip title="Watchlist">
+                <button
+                  onClick={() => addToWatchlist(movieDetails)}
+                  className="flex py-2 mt-5 w-fit rounded-md drop-shadow-lg bg-red-600 gap-2 px-5 items-center  text-white font-extrabold text-[14px] fill-white"
+                >
+                  <GrAdd size={23} />
+                  Add to Watchlist
+                </button>
+              </Tooltip>
             </div>
           </div>
           <div className="w-full h-[2px] bg-[#EAECF0]"></div>
