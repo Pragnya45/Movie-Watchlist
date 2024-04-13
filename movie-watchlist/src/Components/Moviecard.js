@@ -105,12 +105,14 @@ export default function Moviecard({
               />
             </div>
             {!watchlist && (
-              <button
-                onClick={() => addToWatchlist(movie)}
-                className="absolute bg-white rounded-full p-2 top-0 left-0"
-              >
-                <BsBookmarkPlusFill className="sm:text-[30px] text-[40px]" />
-              </button>
+              <Tooltip title="Add to Watchlist" placement="bottom">
+                <button
+                  onClick={() => addToWatchlist(movie)}
+                  className="absolute bg-white rounded-full p-2 top-0 left-0"
+                >
+                  <BsBookmarkPlusFill className="sm:text-[30px] text-[40px]" />
+                </button>
+              </Tooltip>
             )}
             <div className="flex flex-col p-2">
               <p className="text-black ml-auto text-[12px] font-semibold">

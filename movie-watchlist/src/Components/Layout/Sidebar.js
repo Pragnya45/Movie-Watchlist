@@ -30,6 +30,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
       } border-r-2 px-6 border-[#EAECF0] absolute ${
         openSidebar ? "left-[0px]" : "left-[-500px] sm:left-[0px]"
       }  sm:relative flex bg-white  items-center flex-col gap-2 z-10`}
+      onClick={() => setOpenSidebar(false)}
     >
       <h1 className="mx-auto my-1 text-3xl font-semibold text-red-600">
         Watchlist
