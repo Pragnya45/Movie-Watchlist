@@ -36,7 +36,7 @@ export default function Movies() {
     fetchMovies();
   };
   return (
-    <div className="flex flex-col gap-8 py-4 px-6">
+    <div className="flex flex-col gap-8 py-4 sm:px-6">
       <div className="p-4 w-full flex flex-col border-2 items-center sm:items-start border-red-600 rounded-md">
         <p className="text-3xl text-center sm:text-left font-semibold">
           Welcome to <span className="text-red-600">Watchlists</span>
@@ -44,14 +44,24 @@ export default function Movies() {
         <p className="mt-5 text-center sm:text-left">
           Browse Movies, add them to wishlists and share them with friends.
         </p>
-        <div className="flex text-[16px] items-center  text-center sm:text-left">
-          just click the,{" "}
-          <BsBookmarkPlusFill
-            color="#475467"
-            className="sm:text-[20px] text-[40px]"
-          />
-          {""} to add a movie to the watchlist,to see more details click on the
-          Movie poster.
+        <div className="text-[16px] flex flex-col sm:flex-row items-center text-center sm:text-left">
+          <div className="flex">
+            <p className="font-medium">just click the,</p>
+            <span className="align-middle">
+              <BsBookmarkPlusFill color="#475467" />
+            </span>
+          </div>
+          <p>
+            to add a movie to the watchlist,to see more details click on the
+            Movie poster.
+          </p>
+          {/* <button className="text-[16px]">
+            <BsBookmarkPlusFill color="#475467" />
+          </button> */}
+          {/* <p className="font-medium">
+            to add a movie to the watchlist,to see more details click on the
+            Movie poster.
+          </p> */}
         </div>
       </div>
       <div className="border-2 border-[#EAECF0]  items-center gap-1 rounded-md flex w-full">

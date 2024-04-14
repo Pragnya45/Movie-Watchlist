@@ -21,8 +21,8 @@ export default function Watchlist() {
     setWatchlistMovies(updatedWatchlist);
   };
   return (
-    <div className="flex flex-col  gap-8 py-4  items-start sm:px-6">
-      <p className="text-3xl font-semibold text-left drop-shadow-lg text-red-600">
+    <div className="flex flex-col  gap-8 py-4  items-center sm:items-start sm:px-6">
+      <p className="text-3xl font-semibold text-center sm:text-left drop-shadow-lg text-red-600">
         Your Watchlist
       </p>
       <Moviecard

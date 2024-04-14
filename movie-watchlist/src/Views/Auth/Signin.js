@@ -28,7 +28,7 @@ export default function Signin() {
   };
   return (
     <div className="flex items-center justify-center w-full h-screen">
-      <div className="bg-white rounded-lg shadow-lg flex flex-col gap-3 items-center py-8 px-4 max-auto max-w-sm w-full">
+      <div className="bg-white rounded-lg shadow-lg flex flex-col gap-3 items-center py-8 px-4 mx-auto max-w-sm w-full">
         <img src={signinIcon} alt="signin icons" className="w-20 h-20" />
         <form className="flex flex-col items-center w-full gap-3">
           <div className="w-full">

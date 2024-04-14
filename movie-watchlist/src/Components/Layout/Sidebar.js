@@ -32,10 +32,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
       }  sm:relative flex bg-white  items-center flex-col gap-2 z-10`}
       onClick={() => setOpenSidebar(false)}
     >
-      <h1 className="mx-auto my-1 text-3xl font-semibold text-red-600">
-        Watchlist
-      </h1>
-      <div className="border-2 flex rounded-md  p-1 items-center border-[#EAECF0]">
+      <div className="border-2 mt-3 flex rounded-md  p-1 items-center border-[#EAECF0]">
         <FaSearch color="#475467" size={20} />
         <input
           type="text"
