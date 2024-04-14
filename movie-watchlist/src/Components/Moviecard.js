@@ -41,7 +41,6 @@ export default function Moviecard({
     watchlist[email].push(movie);
 
     localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    console.log(watchlist);
     showMessage({
       type: "success",
       value: "Movie added to your watchlist",

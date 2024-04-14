@@ -5,12 +5,11 @@ import { IoMdMoon } from "react-icons/io";
 export function ThemeSwitch() {
   const { toggleTheme, theme } = useTheme();
 
-  const buttonClasses = `text-color-${theme} border-color-${theme} bg-color-${theme}`;
   return (
     <div className="">
       {theme === "light" ? (
         <button
-          className="shadow-lg rounded-full p-2 buttonClasses"
+          className="shadow-lg rounded-full p-2"
           onClick={() => {
             toggleTheme("dark");
           }}
@@ -22,7 +21,7 @@ export function ThemeSwitch() {
           onClick={() => {
             toggleTheme("light");
           }}
-          className="shadow-lg rounded-full p-2 buttonClasses"
+          className="shadow-lg rounded-full p-2"
         >
           <FiSun color="#fff" size={25} />
         </button>

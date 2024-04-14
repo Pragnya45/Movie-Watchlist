@@ -32,7 +32,6 @@ export default function MovieDetails() {
       });
       return;
     }
-    console.log(response);
     setMovieDetails(response);
   };
   useEffect(() => {
@@ -59,7 +58,6 @@ export default function MovieDetails() {
     watchlist[email].push(movie);
 
     localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    console.log(watchlist);
     showMessage({
       type: "success",
       value: "Movie added to your watchlist",
@@ -135,7 +133,9 @@ export default function MovieDetails() {
               </Tooltip>
             </div>
           </div>
-          <div className="w-full h-[2px] bg-[#EAECF0]"></div>
+          <div
+            className={`w-full h-[2px] bg-color-secondary-${theme} bg-[#EAECF0]`}
+          ></div>
           <p className="text-3xl font-semibold text-left drop-shadow-lg text-red-600">
             Plot
           </p>

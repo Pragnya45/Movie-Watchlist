@@ -3,14 +3,12 @@ import { env } from "../utils/env";
 
 const baseUrl = `${env.apiUrl}`;
 export default function useApi() {
-  console.log(env.apiUrl);
   const [loading, setLoading] = useState(false);
 
   const apiFn = async ({ url }) => {
     try {
       setLoading(true);
       const response = await fetch(baseUrl + url);
-      console.log(response);
       if (!response) {
         const errorData = await response.json();
         const errorMessage = errorData?.message;

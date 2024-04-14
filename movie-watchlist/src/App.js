@@ -30,6 +30,5 @@ export default App;
 
 function PrivateRoute({ children }) {
   const isLoggedIn = useSelector(profileState)?.isLoggedIn;
-  console.log(isLoggedIn);
   return isLoggedIn ? children : <Navigate to="/signin" />;
 }
