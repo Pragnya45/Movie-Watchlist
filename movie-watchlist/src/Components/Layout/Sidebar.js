@@ -89,9 +89,40 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
           My lists
         </NavLink>
         <div
+          className={`mt-auto sm:hidden w-full flex flex-col items-start gap-1`}
+        >
+          <div
+            className={`flex gap-2 w-full mt-auto border-2 p-2 rounded-md border-color-input-${theme}`}
+          >
+            <RiAccountCircleLine
+              className={`${
+                theme === "dark" ? "fill-[#E1E1E1]" : "fill-black"
+              }`}
+              size={30}
+            />
+            <p className={`text-color-${theme}`}>{email}</p>
+          </div>
+
+          <button
+            className={`flex  gap-2 w-full p-2 mt-auto items-center   text-[1.05rem] text-color-${theme} font-normal`}
+            onClick={() => {
+              dispatch(logoutFn());
+              navigate("/signin");
+            }}
+          >
+            <GoSignOut
+              className={`${
+                theme === "dark" ? "fill-[#E1E1E1]" : "fill-black"
+              }`}
+              size={20}
+            />
+            Sign out
+          </button>
+        </div>
+        <div
           onMouseEnter={() => setShowMenu(true)}
           onMouseLeave={() => setShowMenu(false)}
-          className={`flex relative cursor-pointer gap-2 border-2 rounded-md border-color-input-${theme} text-color-${theme} border-[#EAECF0] w-full mt-auto items-center fill-black text-[1.05rem] text-black p-1 pl-2  font-normal`}
+          className={`sm:flex relative hidden cursor-pointer gap-2 border-2 rounded-md border-color-input-${theme} text-color-${theme} border-[#EAECF0] w-full mt-auto items-center fill-black text-[1.05rem] text-black p-1 pl-2  font-normal`}
         >
           <RiAccountCircleLine
             className={`${theme === "dark" ? "fill-[#E1E1E1]" : "fill-black"}`}
