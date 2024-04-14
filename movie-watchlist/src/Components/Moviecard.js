@@ -99,7 +99,7 @@ export default function Moviecard({
       {moviesList && moviesList.length ? (
         moviesList?.map((movie, i) => (
           <div
-            className="flex flex-col cursor-pointer relative w-48 h-[20rem] shadow-lg"
+            className={`flex flex-col cursor-pointer relative w-48 h-[20rem] shadow-lg bg-color-sidebar-${theme} `}
             key={i}
           >
             <div
@@ -154,9 +154,8 @@ export default function Moviecard({
           <p
             className={`text-color-${theme} text-center font-semibold text-2xl`}
           >
-            {watchlist
-              ? "Oops! It seems there are no items in your watchlist at the moment"
-              : "No movies Found"}
+            {watchlist &&
+              "Oops! It seems there are no movies in your watchlist at the moment"}
           </p>
         </div>
       )}
