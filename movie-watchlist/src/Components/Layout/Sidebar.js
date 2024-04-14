@@ -46,7 +46,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
         />
       </div>
 
-      <div className="flex flex-col justify-between h-[70%] items-start w-full gap-3 pt-4">
+      <div className="flex flex-col justify-between h-[75%] items-start w-full gap-3 pt-4">
         {sidebarLinks.map((link, index) => (
           <NavLink
             key={index}
