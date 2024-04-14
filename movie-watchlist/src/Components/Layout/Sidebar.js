@@ -107,7 +107,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
           </button>
           {showMenu && (
             <div
-              className={`absolute min-w-[12rem] w-fit flex flex-col items-start py-2  gap-2  shadow-lg rounded-md bg-color-${theme}  -top-[3.4rem] -right-[11.5rem]`}
+              className={`absolute min-w-[12rem] w-fit flex flex-col items-start py-2  gap-2  shadow-lg rounded-md bg-color-sidebar-${theme}  -top-[3.4rem] -right-[11.5rem]`}
             >
               <p className={`text-color-${theme} px-4`}>{email}</p>
               <button

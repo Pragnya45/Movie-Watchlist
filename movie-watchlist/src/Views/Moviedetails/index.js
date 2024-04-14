@@ -11,11 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import { profileState } from "../../Redux/profileSlice";
+import { useTheme } from "../../Components/ThemeProvider";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState();
   const [apiFn] = useApi();
+  const { theme } = useTheme();
   const { showMessage } = useNotification();
   const navigate = useNavigate();
   const { email } = useSelector(profileState);
@@ -68,7 +70,9 @@ export default function MovieDetails() {
     <>
       {movieDetails ? (
         <div className="flex flex-col  gap-8 py-4  items-start sm:px-6">
-          <p className="text-3xl font-semibold text-left drop-shadow-lg text-red-600">
+          <p
+            className={`text-3xl font-semibold text-left drop-shadow-lg text-red-600`}
+          >
             {movieDetails?.Title}
           </p>
           <div className="flex flex-col w-full sm:flex-row gap-6">
@@ -83,17 +87,21 @@ export default function MovieDetails() {
             />
 
             <div className="flex flex-col gap-1">
-              <p className="text-black font-semibold text-[18px]">
+              <p className={`text-color-${theme} font-semibold text-[18px]`}>
                 Director- {""}
                 {movieDetails?.Director}
                 {"("}
                 {movieDetails?.Year}
                 {")"}
               </p>
-              <p className="text-[#475467] font-semibold mt-2 text-[14px]">
+              <p
+                className={`text-color-subtitle-${theme} font-semibold mt-2 text-[14px]`}
+              >
                 {movieDetails?.Genre}
               </p>
-              <p className="text-[#475467] font-semibold text-[14px]">
+              <p
+                className={`text-color-subtitle-${theme} font-semibold text-[14px]`}
+              >
                 {movieDetails?.Country} | {movieDetails?.Language} |{" "}
                 {movieDetails?.Runtime}
               </p>
@@ -111,7 +119,9 @@ export default function MovieDetails() {
                   {movieDetails?.imdbRating}
                 </button>
               </div>
-              <p className="text-[#475467] font-semibold  mt-2 text-[14px]">
+              <p
+                className={`text-color-subtitle-${theme} font-semibold  mt-2 text-[14px]`}
+              >
                 Relased - {movieDetails?.Released}
               </p>
               <Tooltip title="Watchlist">
@@ -129,7 +139,9 @@ export default function MovieDetails() {
           <p className="text-3xl font-semibold text-left drop-shadow-lg text-red-600">
             Plot
           </p>
-          <p className="text-[#475467] font-semibold text-center sm:text-left text-[14px]">
+          <p
+            className={`text-color-subtitle-${theme} font-semibold text-center sm:text-left text-[14px]`}
+          >
             {movieDetails?.Plot}
           </p>
         </div>

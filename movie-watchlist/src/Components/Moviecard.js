@@ -8,6 +8,7 @@ import { GoSignOut } from "react-icons/go";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import { profileState } from "../Redux/profileSlice";
+import { useTheme } from "./ThemeProvider";
 
 export default function Moviecard({
   moviesList,
@@ -15,7 +16,7 @@ export default function Moviecard({
   removeFromWatchlist,
 }) {
   const { email } = useSelector(profileState);
-
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const { showMessage } = useNotification();
 
@@ -64,18 +65,28 @@ export default function Moviecard({
     return (
       <div className="relative" ref={menuRef}>
         <Tooltip title="Remove from Watchlist" placement="bottom">
-          <IoEllipsisVerticalSharp onClick={() => setShowMenu(!showMenu)} />
+          <IoEllipsisVerticalSharp
+            onClick={() => setShowMenu(!showMenu)}
+            className={`${theme === "dark" ? "fill-[#E1E1E1]" : "fill-black"}`}
+          />
         </Tooltip>
         {showMenu && (
-          <div className="absolute z-10 flex flex-col items-start p-4 gap-3 shadow-lg rounded-md bg-white -top-[4rem] -right-[6rem]">
+          <div
+            className={`bg-color-sidebar-${theme} absolute z-10 flex flex-col items-start p-4 gap-3 shadow-lg rounded-md  -top-[4rem] -right-[6rem]`}
+          >
             <button
-              className="flex gap-2 w-full mt-auto items-center text-[1.05rem] text-black font-normal"
+              className={`flex gap-2 w-full mt-auto items-center text-[1.05rem] text-color-${theme} font-normal`}
               onClick={(e) => {
                 e.stopPropagation();
                 removeFromWatchlist(movie.imdbID);
               }}
             >
-              <GoSignOut color="#000" size={20} />
+              <GoSignOut
+                className={`${
+                  theme === "dark" ? "fill-[#E1E1E1]" : "fill-black"
+                }`}
+                size={20}
+              />
               Remove
             </button>
           </div>
@@ -115,17 +126,23 @@ export default function Moviecard({
               </Tooltip>
             )}
             <div className="flex flex-col p-2">
-              <p className="text-black ml-auto text-[12px] font-semibold">
+              <p
+                className={`text-color-${theme} ml-auto text-[12px] font-semibold`}
+              >
                 Imdb-<span className="text-red-600">{movie?.imdbID}</span>
               </p>
               <div className="flex items-center justify-between">
-                <p className="mt-2 text-black text-[16px] line-clamp-2 font-semibold">
+                <p
+                  className={`mt-2 text-color-${theme} text-[16px] line-clamp-2 font-semibold`}
+                >
                   {movie?.Title}
                 </p>
 
                 {watchlist && <MovieMenu movie={movie} />}
               </div>
-              <p className="text-[#475467] text-[12px] font-semibold">
+              <p
+                className={`text-color-subtitle-${theme} text-[12px] font-semibold`}
+              >
                 {"("}
                 {movie?.Year}
                 {")"}
@@ -135,7 +152,9 @@ export default function Moviecard({
         ))
       ) : (
         <div className="w-full h-[60vh] flex items-center justify-center">
-          <p className="text-black text-center font-semibold text-2xl">
+          <p
+            className={`text-color-${theme} text-center font-semibold text-2xl`}
+          >
             {watchlist
               ? "Oops! It seems there are no items in your watchlist at the moment"
               : "No movies Found"}

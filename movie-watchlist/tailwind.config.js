@@ -7,7 +7,9 @@ module.exports = {
         "color-dark": "#1F1F1F",
         "color-light": "#fff",
         "color-sidebar-dark": "#000000",
+        "color-sidebar-light": "#fff",
         "color-secondary-dark": "#D9D9D94D",
+        "color-banner-dark": "#D9D9D91A",
         "color-red-dark": "#F33F3F",
       },
       borderColor: {
@@ -17,6 +19,8 @@ module.exports = {
       textColor: {
         "color-dark": "#E1E1E1",
         "color-light": "#000",
+        "color-subtitle-dark": "#9A9A9A",
+        "color-subtitle-light": "#475467",
       },
     },
   },
@@ -26,6 +30,12 @@ module.exports = {
     },
     {
       pattern: /text-color-(light)/,
+    },
+    {
+      pattern: /text-color-subtitle-(dark)/,
+    },
+    {
+      pattern: /text-color-subtitle-(light)/,
     },
     {
       pattern: /bg-color-(dark)/,
@@ -40,7 +50,13 @@ module.exports = {
       pattern: /bg-color-red-(dark)/,
     },
     {
+      pattern: /bg-color-banner-(dark)/,
+    },
+    {
       pattern: /bg-color-sidebar-(dark)/,
+    },
+    {
+      pattern: /bg-color-sidebar-(light)/,
     },
     {
       pattern: /border-color-(dark)/,
