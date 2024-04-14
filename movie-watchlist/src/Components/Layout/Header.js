@@ -7,9 +7,12 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { profileState } from "../../Redux/profileSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useRef } from "react";
+import { ThemeSwitch } from "../ThemeSwitch";
+import { useTheme } from "../ThemeProvider";
 export default function Header({ openSidebar, setOpenSidebar }) {
-  const { email } = useSelector(profileState);
   const menuRef = useRef(null);
+  const { theme } = useTheme();
+
   const handlePopup = (e) => {
     e.stopPropagation();
     if (menuRef.current && showMenu && !menuRef.current.contains(e.target)) {
@@ -21,17 +24,17 @@ export default function Header({ openSidebar, setOpenSidebar }) {
     window && window.addEventListener("mousedown", handlePopup);
   }
   const [showMenu, setShowMenu] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   return (
-    <header className="min-h-[5rem] h-[5rem] shadow-md">
-      <div className="h-full w-full max-w-screen-2xl flex items-center mx-auto px-4 justify-between">
+    <header
+      className={`min-h-[5rem] h-[5rem] w-full z-10 shadow-lg bg-color-sidebar-${theme}`}
+    >
+      <div className="h-full w-full  max-w-screen-2xl  flex items-center mx-auto px-4 justify-between">
         <div className="flex gap-4">
           <button
-            className="sm:hidden cursor-pointer"
+            className="sm:hidden z-10 cursor-pointer"
             onClick={() => setOpenSidebar(!openSidebar)}
           >
-            <FiMenu color="#000" size={30} />
+            <FiMenu fill={theme === "dark" ? "#E1E1E1" : "black"} size={30} />
           </button>
           <Link to={"/"} className="flex h-full items-center sm:pl-4 gap-2">
             <img
@@ -44,7 +47,8 @@ export default function Header({ openSidebar, setOpenSidebar }) {
             </h1>
           </Link>
         </div>
-        <div
+        <ThemeSwitch />
+        {/* <div
           onClick={() => setShowMenu(!showMenu)}
           ref={menuRef}
           className="flex relative sm:hidden ml-auto  cursor-pointer gap-2   items-center fill-black text-[1.05rem] text-black p-1 pl-2  font-normal"
@@ -65,7 +69,7 @@ export default function Header({ openSidebar, setOpenSidebar }) {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </header>
   );

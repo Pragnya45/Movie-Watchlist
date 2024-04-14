@@ -6,12 +6,14 @@ import { Loader } from "../../Components/Loader";
 import useNotification from "../../Hooks/useNotification";
 import useApi from "../../Hooks/useApi";
 import { env } from "../../utils/env";
+import { useTheme } from "../../Components/ThemeProvider";
 
 export default function Movies() {
   const [moviesList, setMoviesList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [apiFn] = useApi();
   const { showMessage } = useNotification();
+  const { theme } = useTheme();
 
   const fetchMovies = async () => {
     const { response, error } = await apiFn({
@@ -36,7 +38,7 @@ export default function Movies() {
     fetchMovies();
   };
   return (
-    <div className="flex flex-col gap-8 py-4 sm:px-6">
+    <div className={` bg-color-${theme} flex flex-col gap-8 py-4 sm:px-6`}>
       <div className="p-4 w-full flex flex-col border-2 items-center sm:items-start border-red-600 rounded-md">
         <p className="text-3xl text-center sm:text-left font-semibold">
           Welcome to <span className="text-red-600">Watchlists</span>
