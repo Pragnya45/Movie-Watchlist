@@ -59,7 +59,7 @@ export default function Sidebar({ openSidebar, setOpenSidebar }) {
             `}
           >
             <button
-              className={`flex gap-2 w-full items-center text-color-${theme} fill-black text-[1.05rem]  p-3  hover:fill-white hover:text-white hover:bg-red-500 hover:rounded-md ${
+              className={`flex gap-2 w-full items-center text-color-${theme} fill-black text-[1.05rem]  p-3   hover:bg-red-500 hover:rounded-md ${
                 location.pathname === link.path
                   ? `font-medium  text-color-${theme}`
                   : "font-normal"
